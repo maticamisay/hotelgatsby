@@ -1,6 +1,24 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import Image from 'gatsby-image'
+import styled from '@emotion/styled'
+import { css } from '@emotion/react';
+
+const Contenido = styled.main`
+padding-top:4rem;
+max-width:1200px;
+width: 95%;
+margin: 0 auto;
+@media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+}
+p{
+    line-height: 2;
+    margin-top: 2rem;
+}
+`
 
 const ContenidoNosotros = () => {
     const informacion = useStaticQuery(graphql`
@@ -17,14 +35,20 @@ const ContenidoNosotros = () => {
                 }
             }
       }`)
-      const {titulo,contenido,imagen} = informacion.allDatoCmsPagina.nodes[0];
+    const { titulo, contenido, imagen } = informacion.allDatoCmsPagina.nodes[0];
     return (
         <>
-        <h2>{titulo}</h2>
-        <div>
-            <p>{contenido}</p>
-            <Image  fluid={imagen.fluid}/>
-        </div>
+            <h2
+                css={css`
+            margin-top:4rem;
+            text-align: center;
+            font-size: 4rem;
+            `}
+            >{titulo}</h2>
+            <Contenido>
+                <p>{contenido}</p>
+                <Image fluid={imagen.fluid} />
+            </Contenido>
 
         </>
     )
